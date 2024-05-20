@@ -73,7 +73,7 @@ This project is a full-stack web application for a blogging platform that allows
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/blogging-platform.git
+   git clone https://github.com/HasalaAbhilasha/blogging-platform.git
    cd blogging-platform
    ```
 
