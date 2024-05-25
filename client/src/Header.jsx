@@ -29,19 +29,19 @@ export default function Header() {
     const username = userInfo?.username;
 
     return (
-        <header>
+        <header className="header">
             <Link to="/" className="logo">Blogging-Platform</Link>
-            <nav>
+            <nav className="nav">
                 {username && (
                     <>
-                        <Link to="/create">Create new post</Link>
-                        <a onClick={logout}>Logout ({username})</a>
+                        <Link to="/create" className="nav-link">Create new post</Link>
+                        <a onClick={logout} className="nav-link">Logout ({username})</a>
                     </>
                 )}
                 {!username && (
                     <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                        <Link to="/login" className="nav-link">Login</Link>
+                        <Link to="/register" className="nav-link">Register</Link>
                     </>
                 )}
             </nav>
