@@ -4,6 +4,8 @@ import { UserContext } from "./UserContext";
 
 export default function Header() {
     const { setUserInfo, userInfo } = useContext(UserContext);
+    const [menuOpen, setMenuOpen] = useState(false);
+
     useEffect(() => {
         fetch('http://localhost:4000/profile', {
             credentials: 'include',
@@ -22,8 +24,11 @@ export default function Header() {
         fetch('http://localhost:4000/logout', {
             credentials: 'include',
             method: 'POST',
-        });
-        setUserInfo(null);
+        })
+            .then(() => {
+                setUserInfo(null);
+                window.location.reload();
+            });
     }
 
     const username = userInfo?.username;
@@ -31,20 +36,23 @@ export default function Header() {
     return (
         <header className="header">
             <Link to="/" className="logo">Blogging-Platform</Link>
-            <nav className="nav">
-                {username && (
+            <button className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+                &#9776;
+            </button>
+            <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+                {username ? (
                     <>
-                        <Link to="/create" className="nav-link">Create new post</Link>
-                        <a onClick={logout} className="nav-link">Logout ({username})</a>
+                        <Link to="/create" className="nav-link" onClick={() => setMenuOpen(false)}>Create new post</Link>
+                        <a onClick={() => { logout(); setMenuOpen(false); }} className="nav-link">Logout ({username})</a>
                     </>
-                )}
-                {!username && (
+                ) : (
                     <>
-                        <Link to="/login" className="nav-link">Login</Link>
-                        <Link to="/register" className="nav-link">Register</Link>
+                        <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>Login</Link>
+                        <Link to="/register" className="nav-link" onClick={() => setMenuOpen(false)}>Register</Link>
                     </>
                 )}
             </nav>
+            <div className={`overlay ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)}></div>
         </header>
     );
 }
