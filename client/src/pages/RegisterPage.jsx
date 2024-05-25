@@ -1,8 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import '../styles/RegisterPage.css';
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     async function register(ev) {
         ev.preventDefault();
         const response = await fetch('http://localhost:4000/register', {
@@ -11,23 +13,37 @@ export default function RegisterPage() {
             headers: { 'Content-Type': 'application/json' },
         });
         if (response.status === 200) {
-            alert('registration successful');
+            alert('Registration successful');
         } else {
-            alert('registration failed');
+            alert('Registration failed');
         }
     }
+
     return (
-        <form className="register" onSubmit={register}>
-            <h1>Register</h1>
-            <input type="text"
-                placeholder="username"
-                value={username}
-                onChange={ev => setUsername(ev.target.value)} />
-            <input type="password"
-                placeholder="password"
-                value={password}
-                onChange={ev => setPassword(ev.target.value)} />
-            <button>Register</button>
+        <form className="form" onSubmit={register}>
+            <p className="form-title">Create an account</p>
+            <div className="input-container">
+                <input
+                    type="text"
+                    placeholder="Enter username"
+                    value={username}
+                    onChange={ev => setUsername(ev.target.value)}
+                />
+                <span></span>
+            </div>
+            <div className="input-container">
+                <input
+                    type="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={ev => setPassword(ev.target.value)}
+                />
+            </div>
+            <button type="submit" className="submit">Register</button>
+            <p className="signup-link">
+                Already have an account?
+                <a href="/login">Sign in</a>
+            </p>
         </form>
     );
 }
