@@ -122,24 +122,35 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
 
     const { token } = req.cookies;
     jwt.verify(token, secret, {}, async (err, info) => {
-        if (err) throw err;
-        const { id, title, summary, content } = req.body;
-        const postDoc = await Post.findById(id);
-        const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-        if (!isAuthor) {
-            return res.status(400).json('you are not the author');
+        if (err) {
+            return res.status(401).json({ message: 'Unauthorized' });
         }
-        await postDoc.update({
-            title,
-            summary,
-            content,
-            cover: newPath ? newPath : postDoc.cover,
-        });
 
-        res.json(postDoc);
+        try {
+            const { id, title, summary, content } = req.body;
+            const postDoc = await Post.findById(id);
+            if (!postDoc) {
+                return res.status(404).json({ message: 'Post not found' });
+            }
+            const isAuthor = String(postDoc.author) === String(info.id);
+            if (!isAuthor) {
+                return res.status(403).json({ message: 'You are not the author' });
+            }
+            postDoc.title = title;
+            postDoc.summary = summary;
+            postDoc.content = content;
+            postDoc.cover = newPath || postDoc.cover;
+
+            await postDoc.save(); // Use save method instead of update
+
+            res.json(postDoc);
+        } catch (error) {
+            console.error('Error in PUT /post:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
     });
-
 });
+
 
 app.get('/post', async (req, res) => {
     try {
