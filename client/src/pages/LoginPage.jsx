@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -14,18 +14,19 @@ export default function LoginPage() {
             body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-        })
+        });
         if (response.ok) {
             response.json().then(userInfo => {
                 setUserInfo(userInfo);
                 setRedirect(true);
             });
         } else {
-            alert('Login failed');
+            alert('wrong credentials');
         }
     }
+
     if (redirect) {
-        return <Navigate to="/" />
+        return <Navigate to={'/'} />
     }
     return (
         <form className="login" onSubmit={login}>
@@ -34,12 +35,10 @@ export default function LoginPage() {
                 placeholder="username"
                 value={username}
                 onChange={ev => setUsername(ev.target.value)} />
-
             <input type="password"
                 placeholder="password"
                 value={password}
                 onChange={ev => setPassword(ev.target.value)} />
-
             <button>Login</button>
         </form>
     );

@@ -1,18 +1,24 @@
-export default function Post() {
+import { formatISO9075 } from "date-fns";
+import { Link } from "react-router-dom";
+
+export default function Post({ _id, title, summary, cover, content, createdAt, author }) {
+
     return (
         <div className="post">
             <div className="image">
-                <img src="https://www.computerworld.com/wp-content/uploads/2024/05/G_usecase_04_enterprise_sales_brand_consistency_custservice_one_click_brand_apply.png?resize=1024%2C576&quality=50&strip=all" alt="placeholder" />
+                <Link to={`/post/${_id}`}>
+                    <img src={'http://localhost:4000/' + cover} alt="" />
+                </Link>
             </div>
             <div className="texts">
-                <h2>Adobe Express Enterprise is where iWork could boldly go</h2>
+                <Link to={`/post/${_id}`}>
+                    <h2>{title}</h2>
+                </Link>
                 <p className="info">
-                    <span>Author: John Doe</span>
-                    <time>2023-01-06 16:45</time>
+                    <a className="author">{author.username}</a>
+                    <time>{formatISO9075(new Date(createdAt))}</time>
                 </p>
-                <p className='summary'>Apple’s deliberate approach to generative AI (genAI) means other companies have been rolling out solutions that include the quickly evolving technology — and Adobe’s pushing hard to realize its benefits. GenAI already figures in its creative products, and as of today it’s available in Adobe Express for Enterprise.
-
-                    I can’t help but feel that genAI-driven tools like these would make excellent additions across the Apple iWork suite (Numbers, Pages, Keynote). Think how useful it would be to be able to sketch out ideas on iPhone to improve on other Apple devices, or even using a PC and iCloud.com. Introduction of powerful creative tools like these with every Mac, iPhone, or iPad makes plenty of sense, and most Apple users surely hope for something close to this at WWDC. </p>
+                <p className="summary">{summary}</p>
             </div>
         </div>
     );

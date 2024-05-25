@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
@@ -8,12 +8,12 @@ export default function RegisterPage() {
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
-            headers: { 'Content-Type': 'application/json', },
+            headers: { 'Content-Type': 'application/json' },
         });
         if (response.status === 200) {
-            alert('Registration successful');
+            alert('registration successful');
         } else {
-            alert('Registration failed');
+            alert('registration failed');
         }
     }
     return (
@@ -23,7 +23,6 @@ export default function RegisterPage() {
                 placeholder="username"
                 value={username}
                 onChange={ev => setUsername(ev.target.value)} />
-
             <input type="password"
                 placeholder="password"
                 value={password}
