@@ -23,9 +23,11 @@ main {
 header {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 50px;
   align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 header a {
@@ -34,13 +36,31 @@ header a {
 }
 
 header a.logo {
-  font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff;
 }
 
 header nav {
   display: flex;
   gap: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .nav {
+    margin-top: 10px;
+  }
+
+  .nav-link {
+    display: block;
+    margin: 10px 0;
+  }
 }
 
 div.post {
@@ -109,6 +129,7 @@ button {
   color: #fff;
   border-radius: 5px;
   padding: 7px 0;
+  margin-top: 5px;
 }
 
 form.login h1,

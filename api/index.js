@@ -174,7 +174,6 @@ app.get('/post/:id', async (req, res) => {
     }
 });
 
-// Assuming you already have the necessary imports and middleware configured
 
 app.delete('/post/:id', async (req, res) => {
     const { id } = req.params;
@@ -184,12 +183,9 @@ app.delete('/post/:id', async (req, res) => {
         if (!deletedPost) {
             return res.status(404).json({ message: 'Post not found' });
         }
-        // You might want to perform additional checks here, such as verifying ownership before allowing deletion
 
-        // If deletion is successful, send a success response
         res.json({ message: 'Post deleted successfully' });
     } catch (error) {
-        // If an error occurs during deletion, send a 500 (Internal Server Error) response
         console.error('Error deleting post:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
