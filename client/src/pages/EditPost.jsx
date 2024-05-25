@@ -80,9 +80,9 @@ export default function EditPost() {
                 <input type="file"
                     onChange={ev => setFiles(ev.target.files)} />
                 <Editor value={content} onChange={setContent} />
-                <button type="submit">Update Post</button>
+                <button className="submit" type="submit">Update Post</button>
             </form>
-            <button onClick={deletePost}>Delete Post</button>
+            <button className="submit" onClick={deletePost}>Delete Post</button>
         </div>
     );
 }
