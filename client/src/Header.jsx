@@ -7,18 +7,26 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_port}/profile`, {
-            credentials: 'include',
-        })
-            .then(response => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_port}/profile`, {
+                    credentials: 'include',
+                });
+
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
                 }
-                return response.json();
-            })
-            .then(userInfo => setUserInfo(userInfo))
-            .catch(error => console.error('There has been a problem with your fetch operation:', error));
-    }, []);
+
+                const data = await response.json();
+                setUserInfo(data);
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                console.error('Fetch error response text:', await error.response.text());
+            }
+        };
+
+        fetchUserProfile();
+    }, [setUserInfo]);
 
     function logout() {
         fetch(`${import.meta.env.VITE_port}/logout`, {
