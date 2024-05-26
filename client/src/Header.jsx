@@ -7,7 +7,7 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:4000/profile', {
+        fetch('blogging-platform-production.up.railway.app/profile', {
             credentials: 'include',
         })
             .then(response => {
@@ -21,7 +21,7 @@ export default function Header() {
     }, []);
 
     function logout() {
-        fetch('http://localhost:4000/logout', {
+        fetch('blogging-platform-production.up.railway.app/logout', {
             credentials: 'include',
             method: 'POST',
         })
