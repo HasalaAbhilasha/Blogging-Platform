@@ -28,7 +28,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(userRoutes);
 app.use(blogRoutes);
 
+const PORT = process.env.PORT || 4000;
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
     console.log('Server is running on port 4000');
 });
