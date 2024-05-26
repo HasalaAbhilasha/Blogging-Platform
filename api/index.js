@@ -8,7 +8,7 @@ require('dotenv').config();
 const userRoutes = require('./routes/userRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 
-app.use(cors({ credentials: true, origin: 'https://blogging-platform-alpha.vercel.app/' }));
+app.use(cors({ credentials: true, origin: 'https://blogging-platform-alpha.vercel.app' }));
 app.use(express.json());
 app.use(cookieParser());
 
