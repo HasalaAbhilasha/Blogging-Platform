@@ -62,6 +62,10 @@ export default function EditPost() {
         }
     }
 
+    async function gotoHome() {
+        setRedirect(true);
+    }
+
     if (redirect) {
         return <Navigate to={'/'} replace />;
     }
@@ -80,7 +84,7 @@ export default function EditPost() {
                 <input type="file"
                     onChange={ev => setFiles(ev.target.files)} />
                 <Editor value={content} onChange={setContent} />
-                <button className="submit" type="submit">Update Post</button>
+                <button className="submit" type="submit" onClick={gotoHome}>Update Post</button>
             </form>
             <button className="submit" onClick={deletePost}>Delete Post</button>
         </div>
