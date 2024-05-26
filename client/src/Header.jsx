@@ -7,7 +7,7 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        fetch('blogging-platform-production.up.railway.app/profile', {
+        fetch(`${import.meta.env.VITE_port}/profile`, {
             credentials: 'include',
         })
             .then(response => {
@@ -21,7 +21,7 @@ export default function Header() {
     }, []);
 
     function logout() {
-        fetch('blogging-platform-production.up.railway.app/logout', {
+        fetch(`${import.meta.env.VITE_port}/logout`, {
             credentials: 'include',
             method: 'POST',
         })

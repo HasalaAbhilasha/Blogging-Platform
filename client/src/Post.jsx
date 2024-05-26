@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 
 export default function Post({ _id, title, summary, cover, content, createdAt, author }) {
 
+    console.log(`${import.meta.env.VITE_port}/${cover}`);
+
     return (
         <div className="post">
             <div className="image">
                 <Link to={`/post/${_id}`}>
-                    <img src={'blogging-platform-production.up.railway.app/' + cover} alt="" />
+                    <img src={`${import.meta.env.VITE_port}/${cover}`} alt="" />
                 </Link>
             </div>
             <div className="texts">

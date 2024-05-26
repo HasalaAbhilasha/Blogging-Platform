@@ -11,7 +11,7 @@ export default function LoginPage() {
 
     async function login(ev) {
         ev.preventDefault();
-        const response = await fetch('blogging-platform-production.up.railway.app/login', {
+        const response = await fetch(`${import.meta.env.VITE_port}/login`, {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },

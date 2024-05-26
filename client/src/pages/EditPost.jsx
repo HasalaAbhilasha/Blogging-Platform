@@ -11,7 +11,7 @@ export default function EditPost() {
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetch(`blogging-platform-production.up.railway.app/post/${id}`)
+        fetch(`${import.meta.env.VITE_port}/post/${id}`)
             .then(response => {
                 if (response.ok) {
                     response.json().then(postInfo => {
@@ -39,7 +39,7 @@ export default function EditPost() {
         if (files?.[0]) {
             data.set('file', files?.[0]);
         }
-        const response = await fetch('blogging-platform-production.up.railway.app/post', {
+        const response = await fetch(`${import.meta.env.VITE_port}/post`, {
             method: 'PUT',
             body: data,
             credentials: 'include',
@@ -50,7 +50,7 @@ export default function EditPost() {
     }
 
     async function deletePost() {
-        const response = await fetch(`blogging-platform-production.up.railway.app/post/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_port}/post/${id}`, {
             method: 'DELETE',
             credentials: 'include',
         });

@@ -18,7 +18,7 @@ export default function CreatePost() {
         data.set('file', files[0]);
         ev.preventDefault();
         try {
-            const response = await fetch('blogging-platform-production.up.railway.app/post', {
+            const response = await fetch(`${import.meta.env.VITE_port}/post`, {
                 method: 'POST',
                 body: data,
                 credentials: 'include',

@@ -7,7 +7,7 @@ export default function RegisterPage() {
 
     async function register(ev) {
         ev.preventDefault();
-        const response = await fetch('blogging-platform-production.up.railway.app/register', {
+        const response = await fetch(`${import.meta.env.VITE_port}/register`, {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: { 'Content-Type': 'application/json' },
