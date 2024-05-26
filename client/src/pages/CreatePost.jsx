@@ -18,7 +18,7 @@ export default function CreatePost() {
         data.set('file', files[0]);
         ev.preventDefault();
         try {
-            const response = await fetch('http://localhost:4000/post', {
+            const response = await fetch('blogging-platform-production.up.railway.app/post', {
                 method: 'POST',
                 body: data,
                 credentials: 'include',
