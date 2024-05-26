@@ -11,6 +11,12 @@ const blogRoutes = require('./routes/blogRoutes');
 app.use(cors({ credentials: true, origin: 'https://blogging-platform-alpha.vercel.app/' }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use((req, res, next) => {
+    console.log('Origin:', req.get('origin'));
+    next();
+});
+
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.set('debug', true);
