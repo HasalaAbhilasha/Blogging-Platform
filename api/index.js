@@ -10,9 +10,10 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
+require('dotenv').config();
 
 const salt = bcrypt.genSaltSync(10);
-const secret = 'sadadfadhakjsdiasdw9qewd';
+const secret = process.env.SECRET;
 
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'));
 
 mongoose.set('debug', true);
 
-mongoose.connect('mongodb+srv://blog:TrYl5dAkxIM2twSB@cluster0.3ktaekz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGODB_URI, {
     serverSelectionTimeoutMS: 30000,
     socketTimeoutMS: 45000,
     connectTimeoutMS: 30000
