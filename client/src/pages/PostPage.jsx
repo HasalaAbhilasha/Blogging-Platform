@@ -1,23 +1,22 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { formatISO9075 } from "date-fns";
 import { UserContext } from "../UserContext";
-import { Link } from 'react-router-dom';
 
 export default function PostPage() {
-    const [postInfo, setPostInfo] = useState(null);
-    const { userInfo } = useContext(UserContext);
-    const { id } = useParams();
+    const [postInfo, setPostInfo] = useState(null); // State to store post information
+    const { userInfo } = useContext(UserContext); // Context to get user information
+    const { id } = useParams(); // Get the post ID from the URL parameters
+
+    // Fetch post information when the component mounts or the ID changes
     useEffect(() => {
         fetch(`${import.meta.env.VITE_port}/post/${id}`)
-            .then(response => {
-                response.json().then(postInfo => {
-                    setPostInfo(postInfo);
-                });
-            });
-    }, []);
+            .then(response => response.json())
+            .then(postInfo => setPostInfo(postInfo))
+            .catch(error => console.error('Error fetching post:', error));
+    }, [id]);
 
-    if (!postInfo) return '';
+    if (!postInfo) return ''; // Return an empty string if post information is not available
 
     return (
         <div className="post-page">

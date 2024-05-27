@@ -2,10 +2,11 @@ import Post from "../Post";
 import { useEffect, useState } from "react";
 
 export default function IndexPage() {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [posts, setPosts] = useState([]); // State for storing posts
+    const [loading, setLoading] = useState(true); // State for loading status
+    const [error, setError] = useState(null); // State for error messages
 
+    // Fetch posts when the component mounts
     useEffect(() => {
         fetch(`${import.meta.env.VITE_port}/post`)
             .then(response => {
@@ -34,9 +35,13 @@ export default function IndexPage() {
 
     return (
         <>
-            {posts.length > 0 && posts.map(post => (
-                <Post key={post._id} {...post} />
-            ))}
+            {posts.length > 0 ? (
+                posts.map(post => (
+                    <Post key={post._id} {...post} /> // Render each post using the Post component
+                ))
+            ) : (
+                <div>No posts available</div>
+            )}
         </>
     );
 }

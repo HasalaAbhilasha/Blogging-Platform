@@ -3,13 +3,14 @@ import { Navigate, useParams } from "react-router-dom";
 import Editor from "../Editor";
 
 export default function EditPost() {
-    const { id } = useParams();
-    const [title, setTitle] = useState('');
-    const [summary, setSummary] = useState('');
-    const [content, setContent] = useState('');
-    const [files, setFiles] = useState('');
-    const [redirect, setRedirect] = useState(false);
+    const { id } = useParams(); // Get the post ID from the URL parameters
+    const [title, setTitle] = useState(''); // State for the post title
+    const [summary, setSummary] = useState(''); // State for the post summary
+    const [content, setContent] = useState(''); // State for the post content
+    const [files, setFiles] = useState(''); // State for the selected file
+    const [redirect, setRedirect] = useState(false); // State for redirection
 
+    // Fetch post data when the component mounts
     useEffect(() => {
         fetch(`${import.meta.env.VITE_port}/post/${id}`)
             .then(response => {
@@ -20,7 +21,6 @@ export default function EditPost() {
                         setSummary(postInfo.summary);
                     });
                 } else {
-                    // Handle error if post is not found
                     console.error("Error fetching post:", response.statusText);
                 }
             })
@@ -29,8 +29,9 @@ export default function EditPost() {
             });
     }, [id]);
 
+    // Handle form submission to update the post
     async function updatePost(ev) {
-        ev.preventDefault();
+        ev.preventDefault(); // Prevent default form submission behavior
         const data = new FormData();
         data.set('title', title);
         data.set('summary', summary);
@@ -46,9 +47,12 @@ export default function EditPost() {
         });
         if (response.ok) {
             setRedirect(true);
+        } else {
+            console.error("Error updating post:", response.statusText);
         }
     }
 
+    // Handle post deletion
     async function deletePost() {
         const response = await fetch(`${import.meta.env.VITE_port}/post/${id}`, {
             method: 'DELETE',
@@ -57,7 +61,6 @@ export default function EditPost() {
         if (response.ok) {
             setRedirect(true);
         } else {
-            // Handle error if deletion fails
             console.error("Error deleting post:", response.statusText);
         }
     }
@@ -69,23 +72,37 @@ export default function EditPost() {
     return (
         <div>
             <form onSubmit={updatePost}>
-                <input type="text"
+                <input
+                    type="text"
                     placeholder="Title"
                     value={title}
-                    onChange={ev => setTitle(ev.target.value)} />
-                <input type="text"
+                    onChange={ev => setTitle(ev.target.value)}
+                />
+                <input
+                    type="text"
                     placeholder="Summary"
                     value={summary}
-                    onChange={ev => setSummary(ev.target.value)} />
-                <input type="file"
-                    onChange={ev => setFiles(ev.target.files)} />
-                <Editor value={content} onChange={setContent} />
+                    onChange={ev => setSummary(ev.target.value)}
+                />
+                <input
+                    type="file"
+                    onChange={ev => setFiles(ev.target.files)}
+                />
+                <Editor
+                    value={content}
+                    onChange={setContent}
+                />
                 <div className="submit-wrapper">
-                    <button className="submit update-btn" type="submit" >Update Post</button>
-                    <button className="submit delete-btn" onClick={deletePost}>Delete Post</button>
+                    <button className="submit update-btn" type="submit">Update Post</button>
+                    <button
+                        className="submit delete-btn"
+                        type="button"
+                        onClick={deletePost}
+                    >
+                        Delete Post
+                    </button>
                 </div>
             </form>
-
         </div>
     );
 }

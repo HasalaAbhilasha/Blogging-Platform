@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
+// Define the schema for the Post model
 const PostSchema = new Schema({
     title: String,
     summary: String,
@@ -11,6 +12,8 @@ const PostSchema = new Schema({
     timestamps: true,
 });
 
+// Create the Post model using the schema
 const PostModel = model('Post', PostSchema);
 
+// Export the Post model
 module.exports = PostModel;

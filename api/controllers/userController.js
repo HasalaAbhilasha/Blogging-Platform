@@ -6,6 +6,8 @@ require('dotenv').config();
 const salt = bcrypt.genSaltSync(10);
 const secret = process.env.SECRET;
 
+
+// Register a new user
 exports.register = async (req, res) => {
     const { username, password } = req.body;
 
@@ -21,6 +23,7 @@ exports.register = async (req, res) => {
     }
 };
 
+// User login
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -45,6 +48,7 @@ exports.login = async (req, res) => {
     }
 };
 
+// Get user profile
 exports.profile = (req, res) => {
     const { token } = req.cookies;
     jwt.verify(token, secret, {}, (err, info) => {
@@ -53,6 +57,8 @@ exports.profile = (req, res) => {
     });
 };
 
+
+// User logout
 exports.logout = (req, res) => {
     res.cookie('token', '').json('ok');
 };

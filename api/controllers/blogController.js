@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const secret = process.env.SECRET;
 
+// Create a new post
 exports.createPost = async (req, res) => {
     console.log('Received POST request at /post');
     try {
@@ -36,7 +37,7 @@ exports.createPost = async (req, res) => {
     }
 };
 
-
+// Update an existing post
 exports.updatePost = async (req, res) => {
     let newPath = null; if (req.file) {
         const { originalname, path } = req.file; const parts = originalname.split('.'); const ext = parts[parts.length - 1]; newPath = path +
@@ -74,6 +75,7 @@ exports.updatePost = async (req, res) => {
 }
 
 
+// Get the latest posts
 exports.getPosts = async (req, res) => {
     try {
         const posts = await Post.find()
@@ -86,6 +88,7 @@ exports.getPosts = async (req, res) => {
     }
 };
 
+// Get a post by ID
 exports.getPostById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -96,6 +99,7 @@ exports.getPostById = async (req, res) => {
     }
 };
 
+// Delete a post
 exports.deletePost = async (req, res) => {
     const { id } = req.params;
     try {
