@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import '../styles/LoginPage.css'; // Ensure this CSS file is correctly linked
+import '../styles/LoginPage.css';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -32,30 +32,32 @@ export default function LoginPage() {
     }
 
     return (
-        <form className="form" onSubmit={login}>
-            <p className="form-title">Sign in to your account</p>
-            <div className="input-container">
-                <input
-                    type="text"
-                    placeholder="Enter username"
-                    value={username}
-                    onChange={ev => setUsername(ev.target.value)}
-                />
-                <span></span>
-            </div>
-            <div className="input-container">
-                <input
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={ev => setPassword(ev.target.value)}
-                />
-            </div>
-            <button type="submit" className="submit">Sign in</button>
-            <p className="signup-link">
-                No account?
-                <a href="/register">Sign up</a>
-            </p>
-        </form>
+        <div className="form-wrapper">
+            <form className="form" onSubmit={login}>
+                <p className="form-title">Sign in to your account</p>
+                <div className="input-container">
+                    <input
+                        type="text"
+                        placeholder="Enter username"
+                        value={username}
+                        onChange={ev => setUsername(ev.target.value)}
+                    />
+                    <span></span>
+                </div>
+                <div className="input-container">
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={ev => setPassword(ev.target.value)}
+                    />
+                </div>
+                <button type="submit" className="submit">Sign in</button>
+                <p className="signup-link">
+                    No account?
+                    <a href="/register">Sign up</a>
+                </p>
+            </form>
+        </div>
     );
 }

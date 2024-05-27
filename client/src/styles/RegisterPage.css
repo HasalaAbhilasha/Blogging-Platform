@@ -1,7 +1,16 @@
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 0;
+}
+
 .form {
     background-color: #fff;
     display: block;
     padding: 1rem;
+    min-width: 350px;
     max-width: 350px;
     margin: 0 auto;
     border-radius: 0.5rem;
@@ -34,7 +43,6 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     width: 100%;
-    /* Use 100% width to ensure it adapts to the parent container */
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }

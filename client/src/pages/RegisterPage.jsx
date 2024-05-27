@@ -20,30 +20,32 @@ export default function RegisterPage() {
     }
 
     return (
-        <form className="form" onSubmit={register}>
-            <p className="form-title">Create an account</p>
-            <div className="input-container">
-                <input
-                    type="text"
-                    placeholder="Enter username"
-                    value={username}
-                    onChange={ev => setUsername(ev.target.value)}
-                />
-                <span></span>
-            </div>
-            <div className="input-container">
-                <input
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={ev => setPassword(ev.target.value)}
-                />
-            </div>
-            <button type="submit" className="submit">Register</button>
-            <p className="signup-link">
-                Already have an account?
-                <a href="/login">Sign in</a>
-            </p>
-        </form>
+        <div className="form-wrapper">
+            <form className="form" onSubmit={register}>
+                <p className="form-title">Create an account</p>
+                <div className="input-container">
+                    <input
+                        type="text"
+                        placeholder="Enter username"
+                        value={username}
+                        onChange={ev => setUsername(ev.target.value)}
+                    />
+                    <span></span>
+                </div>
+                <div className="input-container">
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={ev => setPassword(ev.target.value)}
+                    />
+                </div>
+                <button type="submit" className="submit">Register</button>
+                <p className="signup-link">
+                    Already have an account?
+                    <a href="/login">Sign in</a>
+                </p>
+            </form>
+        </div>
     );
 }

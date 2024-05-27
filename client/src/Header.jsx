@@ -42,13 +42,13 @@ export default function Header() {
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 {username ? (
                     <>
-                        <Link to="/create" className="nav-link" onClick={() => setMenuOpen(false)}>Create new post</Link>
-                        <a onClick={() => { logout(); setMenuOpen(false); }} className="nav-link">Logout ({username})</a>
+                        <Link to="/create" className="nav-link buttonStyle" onClick={() => setMenuOpen(false)}>Create new post</Link>
+                        <a onClick={() => { logout(); setMenuOpen(false); }} className="nav-link buttonStyle logout">Logout ({username})</a>
                     </>
                 ) : (
                     <>
-                        <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>Login</Link>
-                        <Link to="/register" className="nav-link" onClick={() => setMenuOpen(false)}>Register</Link>
+                        <Link to="/login" className="nav-link buttonStyle" onClick={() => setMenuOpen(false)}>Login</Link>
+                        <Link to="/register" className="nav-link buttonStyle" onClick={() => setMenuOpen(false)}>Register</Link>
                     </>
                 )}
             </nav>

@@ -8,6 +8,7 @@ const secret = process.env.SECRET;
 
 exports.register = async (req, res) => {
     const { username, password } = req.body;
+
     try {
         const userDoc = await User.create({
             username,
