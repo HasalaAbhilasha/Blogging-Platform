@@ -62,7 +62,7 @@ exports.updatePost = async (req, res) => {
             postDoc.content = content;
             postDoc.cover = newPath || postDoc.cover;
 
-            await postDoc.save(); // Use save method instead of update
+            await postDoc.save();
 
             res.json(postDoc);
         } catch (error) {
