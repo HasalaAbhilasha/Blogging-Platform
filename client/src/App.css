@@ -29,7 +29,7 @@ main {
   color: #fff;
   position: relative;
   z-index: 10;
-  /* Ensure header is above overlay */
+  margin-bottom: 20px;
 }
 
 .logo {
@@ -46,7 +46,6 @@ main {
   color: #fff;
   cursor: pointer;
   z-index: 20;
-  /* Ensure the icon is above the overlay */
 }
 
 .nav {
@@ -60,7 +59,7 @@ main {
   color: #fff;
 }
 
-/* Overlay for the mobile menu */
+
 .overlay {
   display: none;
   position: fixed;
